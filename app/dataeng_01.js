@@ -4,7 +4,8 @@ function updateDivText() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            divElem.innerHTML = this.responseText;
+            var jsonResponse = JSON.parse(this.responseText);
+            divElem.innerHTML = jsonResponse.body;
         }
     };
     xhttp.open("GET",
