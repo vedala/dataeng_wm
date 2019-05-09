@@ -28,7 +28,34 @@ def handler(event, context):
     This function fetches content from Postgres RDS instance
     """
 
-    query = """select date_part('year', "Date") as year, count(1) as num_weeks
+    start_year = event['queryStringParameters'].get('startYear')
+    end_year = event['queryStringParameters'].get('endYear')
+
+    if start_year and end_year:
+        query = \
+            """select date_part('year', "Date") as year, count(1) as num_weeks
+            from (select distinct "Date" from walmartinteg.sales) tab2
+            where date_part('year', "Date") >= %s
+                and date_part('year', "Date") <= %s
+            group by 1
+            order by 1""" % (start_year, end_year)
+    elif start_year:
+        query = \
+            """select date_part('year', "Date") as year, count(1) as num_weeks
+            from (select distinct "Date" from walmartinteg.sales) tab2
+            where date_part('year', "Date") >= %s
+            group by 1
+            order by 1""" % (start_year)
+    elif end_year:
+        query = \
+            """select date_part('year', "Date") as year, count(1) as num_weeks
+            from (select distinct "Date" from walmartinteg.sales) tab2
+            where date_part('year', "Date") <= %s
+            group by 1
+            order by 1""" % (end_year)
+    else:
+        query = \
+            """select date_part('year', "Date") as year, count(1) as num_weeks
             from (select distinct "Date" from walmartinteg.sales) tab2
             group by 1
             order by 1"""

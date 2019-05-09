@@ -14,8 +14,14 @@ function fetchDataAndDisplayChart() {
             displayChart('chart001', labels, data);
         }
     };
-    xhttp.open("GET",
-        "https://uhgvpddk05.execute-api.us-east-1.amazonaws.com/prod", true);
+
+    var startYearValue = document.getElementById('start_year').value;
+    var endYearValue = document.getElementById('end_year').value;
+    baseURL = "https://oqfjb7fjl3.execute-api.us-east-1.amazonaws.com/prod";
+    queryString = `?startYear=${startYearValue}&endYear=${endYearValue}`
+    apiURL = baseURL + queryString;
+                
+    xhttp.open("GET", apiURL, true);
     xhttp.send();
 }
 
