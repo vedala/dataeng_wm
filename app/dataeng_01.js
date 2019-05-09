@@ -1,12 +1,9 @@
-function updateDivText() {
-    var divElem = document.getElementById("div01");
-    divElem.innerHTML = "Button clicked";
+function fetchDataAndDisplayChart() {
     var xhttp = new XMLHttpRequest();
     xhttp.overrideMimeType('application/json');
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var jsonResponse = JSON.parse(this.responseText);
-            divElem.innerHTML = jsonResponse.body;
             var labels = [];
             var data = [];
             bodyArray = jsonResponse['body'];
@@ -66,5 +63,5 @@ function displayChart(canvasElemName, labels, data) {
 
 document.addEventListener("DOMContentLoaded", function(event) {
     var elem = document.getElementById("button01");
-    elem.addEventListener("click", updateDivText, false);
+    elem.addEventListener("click", fetchDataAndDisplayChart, false);
 });
