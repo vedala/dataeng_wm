@@ -2,16 +2,23 @@ function updateDivText() {
     var divElem = document.getElementById("div01");
     divElem.innerHTML = "Button clicked";
     var xhttp = new XMLHttpRequest();
-    var that = this;
+    xhttp.overrideMimeType('application/json');
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var jsonResponse = JSON.parse(this.responseText);
             divElem.innerHTML = jsonResponse.body;
-            displayChart('chart001', [1990, 1991, 1992], [20, 25, 30]);
+            var labels = [];
+            var data = [];
+            bodyArray = jsonResponse['body'];
+            bodyArray.forEach(function(elem) {
+                labels.push(elem[0]);
+                data.push(elem[1]);
+            });
+            displayChart('chart001', labels, data);
         }
     };
     xhttp.open("GET",
-        "https://iuesc2zye0.execute-api.us-east-1.amazonaws.com/prod", true);
+        "https://uhgvpddk05.execute-api.us-east-1.amazonaws.com/prod", true);
     xhttp.send();
 }
 
