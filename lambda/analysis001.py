@@ -39,7 +39,9 @@ def handler(event, context):
         for row in cur:
             rows.append(row)
 
-    return {
+    return_dict = {
         'statusCode': 200,
-        'body': json.dumps(rows)
+        'body': rows
     }
+
+    return return_dict
