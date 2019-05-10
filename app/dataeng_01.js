@@ -63,6 +63,9 @@ function displayChart(canvasElemName, labels, data) {
                     }
                 }]
             },
+            legend: {
+                display: false,
+            },
             responsive: true,
             maintainAspectRatio: false
         }
