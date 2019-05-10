@@ -66,6 +66,12 @@ function displayChart(canvasElemName, labels, data) {
             legend: {
                 display: false,
             },
+            title: {
+                display: true,
+                position: 'bottom',
+                text: "Data Availability, Number of Weeks per Year",
+                fontSize: 14,
+            },
             responsive: true,
             maintainAspectRatio: false
         }
