@@ -1,3 +1,5 @@
+var myChart;
+
 function fetchDataAndDisplayChart() {
     var xhttp = new XMLHttpRequest();
     xhttp.overrideMimeType('application/json');
@@ -27,7 +29,17 @@ function fetchDataAndDisplayChart() {
 
 function displayChart(canvasElemName, labels, data) {
     var ctx = document.getElementById(canvasElemName).getContext('2d');
-    var myChart = new Chart(ctx, {
+
+    //
+    // destroy chart element, if it has been created.
+    // This is required to overcome chart.js issue where older chart
+    // is displayed when hovering over a chart.
+    //
+    if (myChart) {
+        myChart.destroy();
+    }
+
+    myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
