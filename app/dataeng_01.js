@@ -13,7 +13,7 @@ function fetchDataAndDisplayChart() {
                 labels.push(elem[0]);
                 data.push(elem[1]);
             });
-            displayChart('chart001', labels, data);
+            displayChart('chart01', labels, data);
         }
     };
 
