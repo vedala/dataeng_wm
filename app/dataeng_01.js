@@ -57,7 +57,9 @@ function displayChart(canvasElemName, labels, data) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        max: 52,
+                        stepSize: 12
                     }
                 }]
             },
