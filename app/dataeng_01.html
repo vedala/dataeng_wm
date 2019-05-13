@@ -6,6 +6,7 @@
         <script src="dataeng_01.js"></script>
     </head>
     <body>
+        <h2>Analysis 1</h2>
         <label for="start_year">Start year</label>
         <br>
         <input type="number" id="start_year" name="start_year">
@@ -21,6 +22,37 @@
         </button>
         <div class="chart-container">
             <canvas id="chart01"></canvas>
+        </div>
+
+        <hr>
+        <h2>Analysis 2</h2>
+        <input type="radio" id="all_holidays" name="which_holidays">
+        <label for="all_holidays">All Holidays</label>
+        <br>
+        <input type="radio" id="pick_holidays" name="which_holidays">
+        <label for="pick_holidays">Pick Holidays</label>
+        <br>
+
+        <p>Choose which holidays to include in chart:</p>
+        <input type="checkbox" id="superbowl" name="superbowl">
+        <label for="superbowl">Super Bowl</label>
+        <br>
+        <input type="checkbox" id="laborday" name="laborday">
+        <label for="superbowl">Labor Day</label>
+        <br>
+        <input type="checkbox" id="thanksgiving" name="thanksgiving">
+        <label for="superbowl">Thanksgiving</label>
+        <br>
+        <input type="checkbox" id="christmas" name="christmas">
+        <label for="superbowl">Christmas</label>
+
+        <br>
+        <br>
+        <button id="button02" type="button">
+            Show analysis
+        </button>
+        <div class="chart-container">
+            <canvas id="chart02"></canvas>
         </div>
     </body>
 </html>
