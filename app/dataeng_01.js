@@ -1,9 +1,9 @@
-var myChart;
+var myChart1;
 
-function fetchDataAndDisplayChart() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.overrideMimeType('application/json');
-    xhttp.onreadystatechange = function() {
+function fetchDataAndDisplayChart1() {
+    var req = new XMLHttpRequest();
+    req.overrideMimeType('application/json');
+    req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var jsonResponse = JSON.parse(this.responseText);
             var labels = [];
@@ -13,7 +13,7 @@ function fetchDataAndDisplayChart() {
                 labels.push(elem[0]);
                 data.push(elem[1]);
             });
-            displayChart('chart01', labels, data);
+            displayChart1('chart01', labels, data);
         }
     };
 
@@ -23,11 +23,38 @@ function fetchDataAndDisplayChart() {
     queryString = `?startYear=${startYearValue}&endYear=${endYearValue}`
     apiURL = baseURL + queryString;
                 
-    xhttp.open("GET", apiURL, true);
-    xhttp.send();
+    req.open("GET", apiURL, true);
+    req.send();
 }
 
-function displayChart(canvasElemName, labels, data) {
+function fetchDataAndDisplayChart2() {
+    var req = new XMLHttpRequest();
+    req.overrideMimeType('application/json');
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var jsonResponse = JSON.parse(this.responseText);
+            var labels = [];
+            var data = [];
+            bodyArray = jsonResponse['body'];
+            bodyArray.forEach(function(elem) {
+                labels.push(elem[0]);
+                data.push(elem[1]);
+            });
+            displayChart1('chart02', labels, data);
+        }
+    };
+
+    var startYearValue = document.getElementById('start_year').value;
+    var endYearValue = document.getElementById('end_year').value;
+    baseURL = "https://oqfjb7fjl3.execute-api.us-east-1.amazonaws.com/prod";
+    queryString = `?startYear=${startYearValue}&endYear=${endYearValue}`
+    apiURL = baseURL + queryString;
+                
+    req.open("GET", apiURL, true);
+    req.send();
+}
+
+function displayChart1(canvasElemName, labels, data) {
     var ctx = document.getElementById(canvasElemName).getContext('2d');
 
     //
@@ -35,11 +62,11 @@ function displayChart(canvasElemName, labels, data) {
     // This is required to overcome chart.js issue where older chart
     // is displayed when hovering over a chart.
     //
-    if (myChart) {
-        myChart.destroy();
+    if (myChart1) {
+        myChart1.destroy();
     }
 
-    myChart = new Chart(ctx, {
+    myChart1 = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -91,6 +118,9 @@ function displayChart(canvasElemName, labels, data) {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    var elem = document.getElementById("button01");
-    elem.addEventListener("click", fetchDataAndDisplayChart, false);
+    var button1 = document.getElementById("button01");
+    button1.addEventListener("click", fetchDataAndDisplayChart1, false);
+
+    var button2 = document.getElementById("button02");
+    button2.addEventListener("click", fetchDataAndDisplayChart2, false);
 });
