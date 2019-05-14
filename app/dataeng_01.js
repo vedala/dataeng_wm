@@ -111,21 +111,25 @@ function fetchDataAndDisplayChart2() {
     }
 
     var checkboxes = document.getElementsByName('selected_holidays');
-    var selectedHolidaysString = "";
+    var selectedHolidaysString = "&selectedHolidays=";
+    var numChecked = 0;
     for (var i = 0; i < checkboxes.length; i += 1) {
         if (checkboxes[i].checked) {
-            if (selectedHolidaysString.length) {
-                selectedHolidaysString += "&selectedHolidays=" + checkboxes[i].value
-            } else {
-                selectedHolidaysString += "selectedHolidays=" + checkboxes[i].value
-            }
+            selectedHolidaysString += checkboxes[i].value + ","
+            numChecked += 1;
         }
+    }
+    if (numChecked > 0) {
+        // remove trailing comma
+        selectedHolidaysString = selectedHolidaysString.slice(0, -1);
     }
 
     baseURL = "https://e5lfum0mci.execute-api.us-east-1.amazonaws.com/prod";
     queryString = `?allOrPick=${radioSelectedValue}`
     apiURL = baseURL + queryString;
-    apiURL += "&" + selectedHolidaysString;
+    if (numChecked > 0) {
+        apiURL += selectedHolidaysString;
+    }
 
     req.open("GET", apiURL, true);
     req.send();
