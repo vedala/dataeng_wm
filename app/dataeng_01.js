@@ -95,16 +95,8 @@ function fetchDataAndDisplayChart2() {
     req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var jsonResponse = JSON.parse(this.responseText);
-            // var labels = [];
-            // var data = [];
-            // bodyArray = jsonResponse['body'];
-            // bodyArray.forEach(function(elem) {
-            //     labels.push(elem[0]);
-            //     data.push(elem[1]);
-            // });
-            console.log(jsonResponse['body']);
-            var labels = ["label1", "label2", "label3"];
-            var data = [10, 20, 30];
+            var labels = jsonResponse['body']['labels'];
+            var data = jsonResponse['body']['rows'];
             displayChart2('chart02', labels, data);
         }
     };
@@ -134,7 +126,7 @@ function fetchDataAndDisplayChart2() {
     queryString = `?allOrPick=${radioSelectedValue}`
     apiURL = baseURL + queryString;
     apiURL += "&" + selectedHolidaysString;
-                
+
     req.open("GET", apiURL, true);
     req.send();
 }
@@ -151,39 +143,46 @@ function displayChart2(canvasElemName, labels, data) {
         myChart1.destroy();
     }
 
+    //
+    // extract groups labels, they are the first column of the "data" argument
+    //
+    var group_labels = [];
+    data.forEach(function(elem) {
+        group_labels.push(elem[0]);
+    });
+
+    //
+    // create datasets array
+    //
+    var datasets_arr = [];
+    for (i = 0; i < labels.length; i += 1) {
+        var sub_group_label = labels[i];
+
+        var sub_group_data = [];
+        for (rowNum = 0; rowNum < data.length; rowNum += 1) {
+            // i+1'th column, since first column is group labels
+            sub_group_data.push(data[rowNum][i+1]);
+        }
+
+        datasets_arr.push(
+            {
+            label: sub_group_label,
+            data: sub_group_data
+            }
+        );
+    }
+
     myChart1 = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels,
-            datasets: [{
-                label: 'Number of Weeks Data Available',
-                data: data,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
+            labels: group_labels,
+            datasets: datasets_arr
         },
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true,
-                        max: 52,
-                        stepSize: 12
+                        beginAtZero: true
                     }
                 }]
             },
@@ -193,7 +192,7 @@ function displayChart2(canvasElemName, labels, data) {
             title: {
                 display: true,
                 position: 'bottom',
-                text: "Data Availability, Number of Weeks per Year",
+                text: "Week of Holiday Sales Compared to Annual Weekly Average",
                 fontSize: 14,
             },
             responsive: true,
