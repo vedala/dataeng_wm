@@ -28,6 +28,8 @@ def handler(event, context):
     This function fetches content from Postgres RDS instance
     """
 
+    print(event)
+    qs_param = event['queryStringParameters']
     all_or_pick = event['queryStringParameters'].get('allOrPick')
     selected_holidays = event['queryStringParameters'].get('selectedHolidays')
     print(selected_holidays)
@@ -39,14 +41,12 @@ def handler(event, context):
         [2011, 6000, 7200, 7400, 7600, 7800],
         [2012, 8000, 8200, 8400, 8600, 8800],
     ]
-    print(labels)
-    print(rows)
 
     return_dict = {
         'statusCode': 200,
         'body': {
-            'rows': rows,
-            'labels': labels
+            'labels': labels,
+            'rows': rows
         }
     }
 
