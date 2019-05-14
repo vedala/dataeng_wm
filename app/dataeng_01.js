@@ -143,8 +143,8 @@ function displayChart2(canvasElemName, labels, data) {
     // This is required to overcome chart.js issue where older chart
     // is displayed when hovering over a chart.
     //
-    if (myChart1) {
-        myChart1.destroy();
+    if (myChart2) {
+        myChart2.destroy();
     }
 
     //
