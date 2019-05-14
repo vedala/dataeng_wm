@@ -34,8 +34,24 @@ def handler(event, context):
     selected_holidays = event['queryStringParameters'].get('selectedHolidays')
     print(selected_holidays)
 
-    labels = ["year", "All Year", "Super Bowl", "Labor Day",
+    if all_or_pick == "all_holidays":
+        labels = ["year", "All Year", "Super Bowl", "Labor Day",
                                                 "Thanksgiving", "Christmas"]
+    else:
+        checkbox_label_dict = {
+            'superbowl':    'Super Bowl',
+            'laborday':     'Labor Day',
+            'thanksgiving': 'Thanksgiving',
+            'christmas':    'Christmas'
+        }
+
+        labels = ["year", "All Year"]
+        selected_holiday_list = selected_holidays.split(',')
+        for holiday_value in selected_holiday_list:
+            labels.append(checkbox_label_dict[holiday_value])
+
+    print(labels)
+
     rows = [
         [2010, 5000, 5200, 5400, 5600, 5800],
         [2011, 6000, 7200, 7400, 7600, 7800],
