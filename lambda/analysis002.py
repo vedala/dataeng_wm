@@ -28,11 +28,9 @@ def handler(event, context):
     This function fetches content from Postgres RDS instance
     """
 
-    print(event)
     qs_param = event['queryStringParameters']
     all_or_pick = event['queryStringParameters'].get('allOrPick')
     selected_holidays = event['queryStringParameters'].get('selectedHolidays')
-    print(selected_holidays)
 
     if all_or_pick == "all_holidays":
         labels = ["year", "All Year", "Super Bowl", "Labor Day",
@@ -50,10 +48,7 @@ def handler(event, context):
         for holiday_value in selected_holiday_list:
             labels.append(checkbox_label_dict[holiday_value])
 
-    print(labels)
-
     query = construct_query(labels)
-    print(query)
 
     with conn.cursor() as cur:
         rows = []
