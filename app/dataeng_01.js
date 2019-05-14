@@ -20,7 +20,7 @@ function fetchDataAndDisplayChart1() {
 
     var startYearValue = document.getElementById('start_year').value;
     var endYearValue = document.getElementById('end_year').value;
-    baseURL = "https://oqfjb7fjl3.execute-api.us-east-1.amazonaws.com/prod";
+    baseURL = getEndpoint(1);
     queryString = `?startYear=${startYearValue}&endYear=${endYearValue}`
     apiURL = baseURL + queryString;
                 
@@ -141,7 +141,7 @@ function fetchDataAndDisplayChart2() {
         selectedHolidaysString = selectedHolidaysString.slice(0, -1);
     }
 
-    baseURL = "https://e5lfum0mci.execute-api.us-east-1.amazonaws.com/prod";
+    baseURL = getEndpoint(2);
     queryString = `?allOrPick=${radioSelectedValue}`
     apiURL = baseURL + queryString;
     if (numChecked > 0) {
