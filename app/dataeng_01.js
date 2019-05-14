@@ -155,13 +155,12 @@ function displayChart2(canvasElemName, labels, data) {
     // create datasets array
     //
     var datasets_arr = [];
-    for (i = 0; i < labels.length; i += 1) {
+    for (i = 1; i < labels.length; i += 1) {
         var sub_group_label = labels[i];
 
         var sub_group_data = [];
         for (rowNum = 0; rowNum < data.length; rowNum += 1) {
-            // i+1'th column, since first column is group labels
-            sub_group_data.push(data[rowNum][i+1]);
+            sub_group_data.push(data[rowNum][i]);
         }
 
         datasets_arr.push(
@@ -186,13 +185,10 @@ function displayChart2(canvasElemName, labels, data) {
                     }
                 }]
             },
-            legend: {
-                display: false,
-            },
             title: {
                 display: true,
                 position: 'bottom',
-                text: "Week of Holiday Sales Compared to Annual Weekly Average",
+                text: "Week-of-Holiday Sales Compared to Annual Weekly Average",
                 fontSize: 14,
             },
             responsive: true,
