@@ -120,6 +120,11 @@ function fetchDataAndDisplayChart2() {
         }
     }
 
+    if (radioSelectedValue === "pick_holidays" && numChecked === 0) {
+        errorElem.innerHTML = "At least one holiday must be picked";
+        return;
+    }
+
     var req = new XMLHttpRequest();
     req.overrideMimeType('application/json');
     req.onreadystatechange = function() {
