@@ -1,4 +1,5 @@
 var myChart1;
+var myChart2;
 
 function fetchDataAndDisplayChart1() {
     var req = new XMLHttpRequest();
@@ -175,7 +176,7 @@ function displayChart2(canvasElemName, labels, data) {
         );
     }
 
-    myChart1 = new Chart(ctx, {
+    myChart2 = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: group_labels,
