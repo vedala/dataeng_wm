@@ -91,16 +91,10 @@ function displayChart1(canvasElemName, labels, data) {
 }
 
 function fetchDataAndDisplayChart2() {
-    var req = new XMLHttpRequest();
-    req.overrideMimeType('application/json');
-    req.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var jsonResponse = JSON.parse(this.responseText);
-            var labels = jsonResponse['body']['labels'];
-            var data = jsonResponse['body']['rows'];
-            displayChart2('chart02', labels, data);
-        }
-    };
+
+    // Fetch element for error message and clear error message
+    var errorElem = document.getElementById('analysis02-error');
+    errorElem.innerHTML = ""
 
     var radios = document.getElementsByName('all_or_pick');
     var radioSelectedValue;
@@ -109,6 +103,11 @@ function fetchDataAndDisplayChart2() {
             radioSelectedValue = radios[i].value;
             break;
         }
+    }
+
+    if (!radioSelectedValue) {
+        errorElem.innerHTML = "Radio button must be selected";
+        return;
     }
 
     var checkboxes = document.getElementsByName('selected_holidays');
@@ -120,6 +119,18 @@ function fetchDataAndDisplayChart2() {
             numChecked += 1;
         }
     }
+
+    var req = new XMLHttpRequest();
+    req.overrideMimeType('application/json');
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var jsonResponse = JSON.parse(this.responseText);
+            var labels = jsonResponse['body']['labels'];
+            var data = jsonResponse['body']['rows'];
+            displayChart2('chart02', labels, data);
+        }
+    };
+
     if (numChecked > 0) {
         // remove trailing comma
         selectedHolidaysString = selectedHolidaysString.slice(0, -1);
