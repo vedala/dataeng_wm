@@ -123,15 +123,15 @@ function fetchDataAndDisplayChart2() {
     for (var i = 0; i < checkboxes.length; i += 1) {
         if (checkboxes[i].checked) {
             if (selectedHolidaysString.length) {
-                selectedHolidaysString += "&selected_holidays=" + checkboxes[i].value
+                selectedHolidaysString += "&selectedHolidays=" + checkboxes[i].value
             } else {
-                selectedHolidaysString += "selected_holidays=" + checkboxes[i].value
+                selectedHolidaysString += "selectedHolidays=" + checkboxes[i].value
             }
         }
     }
 
     baseURL = "https://e5lfum0mci.execute-api.us-east-1.amazonaws.com/prod";
-    queryString = `?all_or_pick=${radioSelectedValue}`
+    queryString = `?allOrPick=${radioSelectedValue}`
     apiURL = baseURL + queryString;
     apiURL += "&" + selectedHolidaysString;
                 
