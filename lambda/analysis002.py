@@ -69,7 +69,7 @@ def handler(event, context):
 def construct_query(labels):
     main_inner_query = """
         (select date_part('year', "Date") as year, 'All Year' as col1, avg("Weekly_Sales")
-        from walmartinteg.sales
+        from walmartinteg2.sales
         where date_part('year', "Date") in (2010, 2011, 2012)
         group by 1, 2)
     """
@@ -81,7 +81,7 @@ def construct_query(labels):
             main_inner_query += """
                 union
                 (select date_part('year', "Date") as year, 'Super Bowl' as col1, avg("Weekly_Sales")
-                from walmartinteg.sales
+                from walmartinteg2.sales
                 where "Date" in ('2010-02-12', '2011-02-11', '2012-02-10')
                 group by 1, 2)
                 """
@@ -89,7 +89,7 @@ def construct_query(labels):
             main_inner_query += """
                 union
                 (select date_part('year', "Date") as year, 'Labor Day' as col1, avg("Weekly_Sales")
-                from walmartinteg.sales
+                from walmartinteg2.sales
                 where "Date" in ('2010-09-10', '2011-09-09', '2012-09-07')
                 group by 1, 2)
                 """
@@ -97,7 +97,7 @@ def construct_query(labels):
             main_inner_query += """
                 union
                 (select date_part('year', "Date") as year, 'Thanksgiving' as col1, avg("Weekly_Sales")
-                from walmartinteg.sales
+                from walmartinteg2.sales
                 where "Date" in ('2010-11-26', '2011-11-25', '2012-11-23')
                 group by 1, 2)
                 """
@@ -105,7 +105,7 @@ def construct_query(labels):
             main_inner_query += """
                 union
                 (select date_part('year', "Date") as year, 'Christmas' as col1, avg("Weekly_Sales")
-                from walmartinteg.sales
+                from walmartinteg2.sales
                 where "Date" in ('2010-12-31', '2011-12-30', '2012-12-28')
                 group by 1, 2)
                 """

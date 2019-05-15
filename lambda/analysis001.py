@@ -34,7 +34,7 @@ def handler(event, context):
     if start_year and end_year:
         query = \
             """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg.sales) tab2
+            from (select distinct "Date" from walmartinteg2.sales) tab2
             where date_part('year', "Date") >= %s
                 and date_part('year', "Date") <= %s
             group by 1
@@ -42,21 +42,21 @@ def handler(event, context):
     elif start_year:
         query = \
             """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg.sales) tab2
+            from (select distinct "Date" from walmartinteg2.sales) tab2
             where date_part('year', "Date") >= %s
             group by 1
             order by 1""" % (start_year)
     elif end_year:
         query = \
             """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg.sales) tab2
+            from (select distinct "Date" from walmartinteg2.sales) tab2
             where date_part('year', "Date") <= %s
             group by 1
             order by 1""" % (end_year)
     else:
         query = \
             """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg.sales) tab2
+            from (select distinct "Date" from walmartinteg2.sales) tab2
             group by 1
             order by 1"""
 
