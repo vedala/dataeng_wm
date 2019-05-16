@@ -68,47 +68,41 @@ def handler(event, context):
 
 def construct_query(labels):
     main_inner_query = """
-        (select date_part('year', "Date") as year, 'All Year' as col1, avg("Weekly_Sales")
+        (select date_part('year', datedim."Date") as year,
+                'All Year' as holiday_name,
+                sum("Weekly_Sales") / count(distinct "Store") / count(distinct "DateKey") as avg_weekly_sales
         from walmartinteg2.sales
-        where date_part('year', "Date") in (2010, 2011, 2012)
-        group by 1, 2)
+        inner join walmartinteg2.date_dimension datedim on sales."DateKey" = datedim."Id"
+        group by 1)
     """
 
+    #
+    # Construct holiday list for where-in clause
+    #
+    holiday_list = "("
     for label in labels:
         if label == "year" or label == "All Year":
             continue
-        elif label == "Super Bowl":
-            main_inner_query += """
-                union
-                (select date_part('year', "Date") as year, 'Super Bowl' as col1, avg("Weekly_Sales")
-                from walmartinteg2.sales
-                where "Date" in ('2010-02-12', '2011-02-11', '2012-02-10')
-                group by 1, 2)
-                """
-        elif label == "Labor Day":
-            main_inner_query += """
-                union
-                (select date_part('year', "Date") as year, 'Labor Day' as col1, avg("Weekly_Sales")
-                from walmartinteg2.sales
-                where "Date" in ('2010-09-10', '2011-09-09', '2012-09-07')
-                group by 1, 2)
-                """
-        elif label == "Thanksgiving":
-            main_inner_query += """
-                union
-                (select date_part('year', "Date") as year, 'Thanksgiving' as col1, avg("Weekly_Sales")
-                from walmartinteg2.sales
-                where "Date" in ('2010-11-26', '2011-11-25', '2012-11-23')
-                group by 1, 2)
-                """
-        elif label == "Christmas":
-            main_inner_query += """
-                union
-                (select date_part('year', "Date") as year, 'Christmas' as col1, avg("Weekly_Sales")
-                from walmartinteg2.sales
-                where "Date" in ('2010-12-31', '2011-12-30', '2012-12-28')
-                group by 1, 2)
-                """
+
+        holiday_list += "'%s'," % label
+
+    holiday_list = holiday_list[:-1]
+    holiday_list += ")"
+    
+    main_inner_query += """
+        union
+        (select year, holiday_name, avg(sum_weekly_sales) as avg_weekly_sales
+        from
+            (select date_part('year', datedim."Date") as year,
+                "Store",
+                datedim."HolidayName" as holiday_name,
+                sum("Weekly_Sales") as sum_weekly_sales
+            from walmartinteg2.sales as sales
+            inner join walmartinteg2.date_dimension as datedim on datedim."Id" = sales."DateKey"
+            where datedim."HolidayName" in %s
+            group by year, "Store", holiday_name
+            ) as sum_query
+        group by 1, 2)""" % holiday_list
 
     #
     # construct attribute list select
@@ -141,11 +135,11 @@ def construct_query(labels):
         %s
         ) mytab order by 1,
             case
-                when col1 = 'All Year'     then 1
-                when col1 = 'Super Bowl'   then 2
-                when col1 = 'Labor Day'    then 3
-                when col1 = 'Thanksgiving' then 4
-                when col1 = 'Christmas'    then 5
+                when holiday_name = 'All Year'     then 1
+                when holiday_name = 'Super Bowl'   then 2
+                when holiday_name = 'Labor Day'    then 3
+                when holiday_name = 'Thanksgiving' then 4
+                when holiday_name = 'Christmas'    then 5
             end
         $$,
         $$
