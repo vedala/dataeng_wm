@@ -70,7 +70,7 @@ def construct_query(labels):
     main_inner_query = """
         (select date_part('year', datedim."Date") as year,
                 'All Year' as holiday_name,
-                sum("Weekly_Sales") / count(distinct "Store") / count(distinct "DateKey") as avg_weekly_sales
+                sum("Weekly_Sales") / count(distinct "Store") / count(distinct "DateKey") as avg_weekly_sales_unrounded
         from walmartinteg2.sales
         inner join walmartinteg2.date_dimension datedim on sales."DateKey" = datedim."Id"
         group by 1)
@@ -91,7 +91,7 @@ def construct_query(labels):
     
     main_inner_query += """
         union
-        (select year, holiday_name, avg(sum_weekly_sales) as avg_weekly_sales
+        (select year, holiday_name, avg(sum_weekly_sales) as avg_weekly_sales_unrounded
         from
             (select date_part('year', datedim."Date") as year,
                 "Store",
@@ -131,7 +131,8 @@ def construct_query(labels):
         SELECT *
         FROM   crosstab(
         $$
-        select * from (
+        select year, holiday_name, round(CAST(avg_weekly_sales_unrounded as numeric), 2) as avg_weekly_sales
+        from (
         %s
         ) mytab order by 1,
             case
