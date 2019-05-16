@@ -125,6 +125,11 @@ function fetchDataAndDisplayChart2() {
         return;
     }
 
+    if (radioSelectedValue === "all_holidays" && numChecked > 0) {
+        errorElem.innerHTML = 'Do not pick specific holidays when "All Holidays" is selected';
+        return;
+    }
+
     var req = new XMLHttpRequest();
     req.overrideMimeType('application/json');
     req.onreadystatechange = function() {
