@@ -33,30 +33,34 @@ def handler(event, context):
 
     if start_year and end_year:
         query = \
-            """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg2.sales) tab2
-            where date_part('year', "Date") >= %s
-                and date_part('year', "Date") <= %s
+            """select date_part('year', datedim."Date") as year, count(distinct "DateKey") as num_weeks
+            from walmartinteg2.sales
+            inner join walmartinteg2.date_dimension as datedim on "DateKey" = datedim."Id"
+                and date_part('year', datedim."Date") >= %s
+                and date_part('year', datedim."Date") <= %s
             group by 1
             order by 1""" % (start_year, end_year)
     elif start_year:
         query = \
-            """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg2.sales) tab2
-            where date_part('year', "Date") >= %s
+            """select date_part('year', datedim."Date") as year, count(distinct "DateKey") as num_weeks
+            from walmartinteg2.sales
+            inner join walmartinteg2.date_dimension as datedim on "DateKey" = datedim."Id"
+                and date_part('year', datedim."Date") >= %s
             group by 1
             order by 1""" % (start_year)
     elif end_year:
         query = \
-            """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg2.sales) tab2
-            where date_part('year', "Date") <= %s
+            """select date_part('year', datedim."Date") as year, count(distinct "DateKey") as num_weeks
+            from walmartinteg2.sales
+            inner join walmartinteg2.date_dimension as datedim on "DateKey" = datedim."Id"
+                and date_part('year', datedim."Date") <= %s
             group by 1
             order by 1""" % (end_year)
     else:
         query = \
-            """select date_part('year', "Date") as year, count(1) as num_weeks
-            from (select distinct "Date" from walmartinteg2.sales) tab2
+            """select date_part('year', datedim."Date") as year, count(distinct "DateKey") as num_weeks
+            from walmartinteg2.sales
+            inner join walmartinteg2.date_dimension as datedim on "DateKey" = datedim."Id"
             group by 1
             order by 1"""
 
