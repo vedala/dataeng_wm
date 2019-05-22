@@ -9,7 +9,9 @@ logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-s3 = boto3.client('s3')
+s3 = boto3.client('s3',
+            aws_access_key_id=os.environ.get('ACCESS_KEY'),
+            aws_secret_access_key=os.environ.get('SECRET_KEY'))
 
 src_bucket_name  = os.environ.get('SRC_BUCKET_NAME')
 src_file_names  = os.environ.get('SRC_FILE_NAMES')
