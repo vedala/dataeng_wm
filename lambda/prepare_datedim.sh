@@ -1,6 +1,8 @@
 function handler () {
     EVENT_DATA=$1
 
+    ./aws s3 cp s3://kvwalmart/train.csv /tmp
+
     cd /tmp
     cut -d ',' -f 3,5 train.csv > two_col.csv
     sed -n '1p' two_col.csv > header_row.csv
@@ -39,6 +41,8 @@ function handler () {
     seq 1 156 > sequence.csv
     paste -d, sequence.csv data_with_holiday_names_joined.csv > data_with_holiday_and_seq.csv
     cat header_row_with_new_columns.csv data_with_holiday_and_seq.csv   > date_dimension.csv
+
+    ./aws s3 cp date_dimension.csv s3://kvwalmart3
 
     RESPONSE="{\"statusCode\": 200, \"body\": \"Success\"}"
     echo $RESPONSE
