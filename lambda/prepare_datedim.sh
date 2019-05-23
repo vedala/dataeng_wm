@@ -1,6 +1,7 @@
 function handler () {
     EVENT_DATA=$1
 
+    HOME=`pwd`
     ./aws s3 cp s3://kvwalmart/train.csv /tmp
 
     cd /tmp
@@ -42,7 +43,8 @@ function handler () {
     paste -d, sequence.csv data_with_holiday_names_joined.csv > data_with_holiday_and_seq.csv
     cat header_row_with_new_columns.csv data_with_holiday_and_seq.csv   > date_dimension.csv
 
-    ./aws s3 cp date_dimension.csv s3://kvwalmart3
+    cd $HOME
+    ./aws s3 cp /tmp/date_dimension.csv s3://kvwalmart3
 
     RESPONSE="{\"statusCode\": 200, \"body\": \"Success\"}"
     echo $RESPONSE
