@@ -11,7 +11,7 @@ function handler () {
     # Data cleaning and preparation
     #
 
-    # All processing done in /tmp
+    # All processing will be done in /tmp directory
     cd /tmp
 
     # Extract only Date and isHoliday columns
@@ -62,10 +62,10 @@ function handler () {
     echo "2012-11-23,Thanksgiving" >> holidays_with_names.csv
     echo "2012-12-28,Christmas" >> holidays_with_names.csv
 
-    # Add holiday_name data to data
+    # Insert holiday_name field into data using join command
     join -t , -1 1 -2 1 -a1  -o'0,1.2,2.2' data_with_new_rows.csv holidays_with_names.csv > data_with_holiday_names_joined.csv
 
-    # Create sequence data for total number of rows in date data
+    # Create sequence column for total number of rows in date data
     # Add sequence data as first column
     seq 1 156 > sequence.csv
     paste -d, sequence.csv data_with_holiday_names_joined.csv > data_with_holiday_and_seq.csv
