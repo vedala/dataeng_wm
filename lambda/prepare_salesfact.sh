@@ -4,8 +4,11 @@ function handler () {
     # Save initial directory location
     HOME=`pwd`
 
-    # Download data file from S3
+    # Download source data file from S3
     ./aws s3 cp s3://kvwalmart/train.csv /tmp
+
+    # Download date dimension file form S3
+    ./aws s3 cp s3://kvwalmart3/date_dimension.csv /tmp
 
     #
     # Data cleaning and preparation
