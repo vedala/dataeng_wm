@@ -32,7 +32,7 @@ function handler () {
 
     # Replace date field with date key
     sort -t , -k 2,2 features_no_header.csv > features_sorted.csv
-    join -t , -1 2 -2 2 -o'1.1,2.1,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,1.11' features_sorted.csv date_dimension.csv > features_joined.csv
+    join -t , -1 2 -2 2 -o'1.1,2.1,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,1.11' features_sorted.csv date_dimension_no_header.csv > features_joined.csv
 
     # Modify header "Date" field name to "DateKey"
     sed 's/Date/DateKey/' header_row.csv > header_row_datekey.csv
