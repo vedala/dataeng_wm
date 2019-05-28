@@ -40,6 +40,9 @@ function handler () {
     # Concatenate header and rest of data
     cat header_row_datekey.csv features_joined.csv > features_fact.csv
 
+    # Go back to initial directory location
+    cd $HOME
+
     # Upload the features_fact.csv file to S3
     ./aws s3 cp /tmp/features_fact.csv s3://kvwalmart3
 
