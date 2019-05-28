@@ -43,7 +43,7 @@ function handler () {
     # Go back to initial directory location
     cd $HOME
 
-    # Upload the date_dimension.csv file to S3
+    # Upload the sales_fact.csv file to S3
     ./aws s3 cp /tmp/sales_fact.csv s3://kvwalmart3
 
     RESPONSE="{\"statusCode\": 200, \"body\": \"Success\"}"
