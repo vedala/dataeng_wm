@@ -5,10 +5,10 @@ function handler () {
     HOME=`pwd`
 
     # Download source data file from S3
-    ./aws s3 cp s3://kvwalmart/features.csv /tmp
+    ./aws s3 cp s3://${SRC_BUCKET}/features.csv /tmp
 
     # Download date dimension file form S3
-    ./aws s3 cp s3://kvwalmart3/date_dimension.csv /tmp
+    ./aws s3 cp s3://${DEST_BUCKET}/date_dimension.csv /tmp
 
     #
     # Data cleaning and preparation
@@ -44,7 +44,7 @@ function handler () {
     cd $HOME
 
     # Upload the features_fact.csv file to S3
-    ./aws s3 cp /tmp/features_fact.csv s3://kvwalmart3
+    ./aws s3 cp /tmp/features_fact.csv s3://${DEST_BUCKET}
 
     RESPONSE="{\"statusCode\": 200, \"body\": \"Success\"}"
     echo $RESPONSE
