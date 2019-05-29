@@ -7,56 +7,102 @@
         <script src="dataeng_01.js"></script>
     </head>
     <body>
-        <h2>Analysis 1</h2>
-        <label for="start_year">Start year</label>
-        <br>
-        <input type="number" id="start_year" name="start_year">
-        <br>
-        <br>
-        <label for="end_year">End year</label>
-        <br>
-        <input type="number" id="end_year" name="end_year">
-        <br>
-        <br>
-        <button id="button01" type="button">
-            Show analysis
-        </button>
-        <div class="chart-container-1">
-            <canvas id="chart01"></canvas>
-        </div>
+        <header>
+            <h1>Walmart Stores Sales Data</h1>
+        </header>
+        <main>
+            <section>
+                <h2>Introduction</h2>
+                <p>
+                    The data location is located <a href="https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting">here</a>
+                </p>
+                <p>
+                    Description of data.
+                </p>
+            </section>
+            <section>
+                <h2>Data Cleaning</h2>
+                <p>
+                    Data cleaning requirements are based on the ETL tool used. The process for
+                    selecting the ETL tool is described in the next section.
+                </p>
+                <p>
+                    Following cleaning and preparation is done on the data:
+                </p>
+                <ul>
+                    <li>Data dimension CSV file generation</li>
+                    <li>Sales fact CSV file generation</li>
+                    <li>Features fact CSV file generation</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Data Load</h2>
+                <p>
+                    Stitch is used as ETL tool (<a href="https://www.stitchdata.com/">link</a>).
+                </p>
+            </section>
+            <section>
+                <h2>Analysis</h2>
+                <p>
+                    The following analyses are sample of possible analyses that can be
+                    performed on the data.
+                </p>
+                <article>
+                    <h3>Analysis 1</h3>
+                    <label for="start_year">Start year</label>
+                    <br>
+                    <input type="number" id="start_year" name="start_year">
+                    <br>
+                    <br>
+                    <label for="end_year">End year</label>
+                    <br>
+                    <input type="number" id="end_year" name="end_year">
+                    <br>
+                    <br>
+                    <button id="button01" type="button">
+                        Show analysis
+                    </button>
+                    <div class="chart-container-1">
+                        <canvas id="chart01"></canvas>
+                    </div>
 
-        <hr>
-        <h2>Analysis 2</h2>
-        <input type="radio" id="all_holidays" name="all_or_pick" value="all_holidays">
-        <label for="all_holidays">All Holidays</label>
-        <br>
-        <input type="radio" id="pick_holidays" name="all_or_pick" value="pick_holidays">
-        <label for="pick_holidays">Pick Holidays</label>
-        <br>
+                </article>
+                <hr>
+                <article>
+                    <h2>Analysis 2</h2>
+                    <input type="radio" id="all_holidays" name="all_or_pick" value="all_holidays">
+                    <label for="all_holidays">All Holidays</label>
+                    <br>
+                    <input type="radio" id="pick_holidays" name="all_or_pick" value="pick_holidays">
+                    <label for="pick_holidays">Pick Holidays</label>
+                    <br>
 
-        <p>Choose which holidays to include in chart:</p>
-        <input type="checkbox" id="superbowl" name="selected_holidays" value="superbowl">
-        <label for="superbowl">Super Bowl</label>
-        <br>
-        <input type="checkbox" id="laborday" name="selected_holidays" value="laborday">
-        <label for="superbowl">Labor Day</label>
-        <br>
-        <input type="checkbox" id="thanksgiving" name="selected_holidays" value="thanksgiving">
-        <label for="superbowl">Thanksgiving</label>
-        <br>
-        <input type="checkbox" id="christmas" name="selected_holidays" value="christmas">
-        <label for="superbowl">Christmas</label>
+                    <p>Choose which holidays to include in chart:</p>
+                    <input type="checkbox" id="superbowl" name="selected_holidays" value="superbowl">
+                    <label for="superbowl">Super Bowl</label>
+                    <br>
+                    <input type="checkbox" id="laborday" name="selected_holidays" value="laborday">
+                    <label for="superbowl">Labor Day</label>
+                    <br>
+                    <input type="checkbox" id="thanksgiving" name="selected_holidays" value="thanksgiving">
+                    <label for="superbowl">Thanksgiving</label>
+                    <br>
+                    <input type="checkbox" id="christmas" name="selected_holidays" value="christmas">
+                    <label for="superbowl">Christmas</label>
 
-        <br>
-        <br>
-        <button id="button02" type="button">
-            Show analysis
-        </button>
-        <br>
-        <div id="analysis02-error">
-        </div>
-        <div class="chart-container-2">
-            <canvas id="chart02"></canvas>
-        </div>
+                    <br>
+                    <br>
+                    <button id="button02" type="button">
+                        Show analysis
+                    </button>
+                    <br>
+                    <div id="analysis02-error">
+                    </div>
+                    <div class="chart-container-2">
+                        <canvas id="chart02"></canvas>
+                    </div>
+                </article>
+            </section>
+        </main>
     </body>
 </html>
