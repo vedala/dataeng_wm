@@ -9,3 +9,8 @@ div {
 .chart-container-2 {
     height: 400px;
 }
+
+main, header {
+    width: 700px;
+    margin: 0 auto;
+}
