@@ -8,16 +8,33 @@
     </head>
     <body>
         <header>
-            <h1>Walmart Stores Sales Data</h1>
+            <h1>Data Ingest, Load and Analysis</h1>
         </header>
         <main>
             <section>
                 <h2>Introduction</h2>
                 <p>
+                    Picked Walmart Recruiting Store Sales data.
+                </p>
+                <p>
+                    Reasons include
+                    i) retail data, easy to understand domain
+                    ii) good description of data made available by Kaggle
+                </p>
+                <p>
                     The data location is located <a href="https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting">here</a>
                 </p>
                 <p>
-                    Description of data.
+                    {Description of data goes here}
+                </p>
+            </section>
+            <section>
+                <h2>Schema Design</h2>
+                <p>
+                    A dimensional design with the following dimension and fact tables:
+                    - date dimension
+                    - sales fact
+                    - features fact
                 </p>
             </section>
             <section>
@@ -40,12 +57,35 @@
                 <p>
                     Stitch is used as ETL tool (<a href="https://www.stitchdata.com/">link</a>).
                 </p>
+                <p>
+                    Stitch is a sync-only provider. Stitch tool does not provide any
+                    transform ability.
+                </p>
+                <p>
+                    Why Stitch
+                    i) offers free account. The only cloud-based ETL tool I found that offers
+                       a free account.
+                    ii) Once I started using Stitch, I found the service to be execellent.
+                        The free account allows only one destination to be added. This was
+                        adequate for my needs.
+                </p>
+                <p>
+                    Data loaded into an AWS RDS PostgreSQL instance.
+                </p>
             </section>
             <section>
                 <h2>Analysis</h2>
                 <p>
                     The following analyses are sample of possible analyses that can be
                     performed on the data.
+                </p>
+                <p>
+                    Analysis buttons kick off ajax calls to AWS Lambda functions.
+
+                    The lambda functions run analysis SQL queries on the postgres
+                    database and return the result to the web application.
+
+                    Chartjs for rendering charts
                 </p>
                 <article>
                     <h3>Analysis 1</h3>
