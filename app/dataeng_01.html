@@ -19,8 +19,8 @@
                     I started with a simple Google search and found <a href="https://www.springboard.com/blog/free-public-data-sets-data-science-project/">this</a> blog post among several useful hits.
                 </p>
                 <p>
-                    Of the datasets described in the above blog post, I picked Walmart Recruiting Store Sales data.
-                    Some of the reasons for picking this dataset inclulde:
+                    Of the datasets described in the blog post, I picked Walmart Recruiting Store Sales data.
+                    Some of the reasons for picking this dataset are:
                 </p>
                 <ul>
                     <li>Retail data, easy to understand domain</li>
@@ -43,11 +43,11 @@
                     The primary data is weekly department-wise sales amount for each store.
                     Another piece of information included is whether a given week is a holiday
                     week or a reguler week. For the purpose of this data, only the following four
-                    are considered holidays: Super Bowl, Labor Day, Thanksgiving and
+                    holidays are considered: Super Bowl, Labor Day, Thanksgiving and
                     Christmas.
                 </p>
                 <p>
-                    In addition, data is available that provides information such temperature
+                    In addition, "features" data is provides information such as temperature
                     in the region, fuel price and markdowns etc.
                 </p>
                 <p>
@@ -69,7 +69,7 @@
                         <ul>
                             <li>Id (PK)</li>
                             <li>Date</li>
-                            <li>Is Holiday?</li>
+                            <li>Is Holiday</li>
                             <li>Holiday Name</li>
                         </ul>
                     </li>
@@ -102,27 +102,27 @@
             <section>
                 <h2>Data Cleaning and Preparation</h2>
                 <p>
-                    Data cleaning requirements are based on the ETL tool used. I picked
-                    <a href="https://www.stitchdata.com/">Stitch</a> as the ETL tool for
-                    this project. I have described the process of selecting the ETL tool
-                    in the next section.
+                    I picked <a href="https://www.stitchdata.com/">Stitch</a> as the ETL
+                    tool for this project (I describe the process of selecting the ETL tool
+                    in the next section).
                 </p>
                 <p>
-                    Here, I will describe cleaning and prepration I performed while creating
-                    each of the dimension and fact CSV files. Because the ETL tool that I picked
-                    is a sync-only tool, I had to perform cleaning of certain data items that
-                    would otherwise be performed by the ETL tool (I found Stitch to be great
-                    even with this limitation).
+                    In this section, I describe the cleaning and prepration I performed while
+                    creating each of the dimension and fact CSV files. Because the ETL tool that
+                    I picked is a sync-only tool, I had to perform cleaning of certain data
+                    items that would otherwise be performed by the ETL tool (I found Stitch to
+                    be great even with this limitation).
                 </p>
                 <ul>
-                    <li>Data dimension CSV file generation
+                    <li>Date dimension CSV file generation
                         <ul>
-                            <li>extract only Date and isHoliday columns from source sales data</li>
+                            <li>extract only Date and isHoliday columns from the source sales data</li>
                             <li>sort on Date field and output only unique rows</li>
-                            <li>data for a few weeks in not available for the years 2010 and 2012.
+                            <li>data for few of the weeks in not available for the years 2010 and 2012.
                                 Add rows for 2010 and 2012 dates that are missing from data</li>
                             <li>insert holiday_name field into data for appropriate rows</li>
-                            <li>add sequence data as first column, this will serve as primary key of dimension table created from the CSV file</li>
+                            <li>add sequence data as first column, this will serve as primary key of
+                                the dimension table created from the CSV file</li>
                         </ul>
                     </li>
                     <li>Sales fact CSV file generation
@@ -135,7 +135,7 @@
                     <li>Features fact CSV file generation
                         <ul>
                             <li>features data contains "NA" for missing data values, since these
-                                items are numeric, convert them to 0.0</li>
+                                items are numeric, I convert them to 0.0</li>
                             <li>delete IsHoliday field</li>
                             <li>similar to what was done for sales fact generation, replace
                                 "Date" field with "Date Key" foreign key</li>
