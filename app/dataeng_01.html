@@ -24,7 +24,7 @@
                 </p>
                 <ul>
                     <li>Retail data, easy to understand domain</li>
-                    <li>This data is hosted on Kaggle, ver good description of data is provided by Kaggle</li>
+                    <li>This data is hosted on Kaggle, very good description of data is provided by Kaggle</li>
                 </ul>
                 </p>
                 <p>
@@ -52,7 +52,7 @@
                 </p>
                 <p>
                     Of the files available from the data source, I used the following files for this
-                    data engineering prokect:
+                    data engineering project:
                 </p>
                 <ul>
                     <li>train.csv</li>
@@ -100,16 +100,32 @@
             </section>
             <hr>
             <section>
-                <h2>Data Cleaning</h2>
+                <h2>Data Cleaning and Preparation</h2>
                 <p>
-                    Data cleaning requirements are based on the ETL tool used. The process for
-                    selecting the ETL tool is described in the next section.
+                    Data cleaning requirements are based on the ETL tool used. I picked
+                    <a href="https://www.stitchdata.com/">Stitch</a> as the ETL tool for
+                    this project. I have described the process of selecting the ETL tool
+                    in the next section.
                 </p>
                 <p>
-                    Following cleaning and preparation is done on the data:
+                    I will describe cleaning and prepration I performed while creating
+                    each of the dimension and fact CSV files. Because the ETL tool that I picked
+                    is a sync-only tool, I had to perform cleaning of certain data items that
+                    would otherwise be performed by the ETL tool (I found Stitch to be great
+                    even with this limitation).
                 </p>
                 <ul>
                     <li>Data dimension CSV file generation</li>
+                    <ul>
+                        <li>extract only Date and isHoliday columns source sales data</li>
+                        <li>sort on Date field and output only unique rows</li>
+                        <li>add rows for 2010 and 2012 dates that are missing from data</li>
+                        <li>concatenate rest of data with 2010 and 2012 rows created above</li>
+                        <li>insert holiday_name field into data</li>
+                        <li>create sequence column for total number of rows in date data</li>
+                        <li>add sequence data as first column</li>
+                    </ul>
+
                     <li>Sales fact CSV file generation</li>
                     <li>Features fact CSV file generation</li>
                 </ul>
