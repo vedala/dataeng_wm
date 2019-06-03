@@ -23,8 +23,8 @@
                     Some of the reasons for picking this dataset are:
                 </p>
                 <ul>
-                    <li>Retail data, easy to understand domain</li>
-                    <li>This data is hosted on Kaggle, very good description of data is provided by Kaggle</li>
+                    <li>retail data, easy to understand domain</li>
+                    <li>this data is hosted on Kaggle, very good description of data is provided by Kaggle</li>
                 </ul>
                 </p>
                 <p>
@@ -141,6 +141,21 @@
                                 "Date" field with "Date Key" foreign key</li>
                         </ul>
                     </li>
+                </ul>
+                <h3>Implementation</h3>
+                <p>
+                    I implemented data cleaning and prepartion using AWS Lambda functions. I
+                    upload the source data files to AWS S3 and the Lambda functions download
+                    the source data files, clean and prepare CSV files containing dimension
+                    & fact data and store the generated files back to S3.
+                </p>
+                <p>
+                    Links to source code of the Lambda functions are:
+                </p>
+                <ul>
+                    <li><a href="https://github.com/vedala/dataeng_wm/blob/master/lambda/prepare_datedim.sh">Date dimension Lambda function</a></li>
+                    <li><a href="https://github.com/vedala/dataeng_wm/blob/master/lambda/prepare_salesfact.sh">Sales fact Lambda function</a></li>
+                    <li><a href="https://github.com/vedala/dataeng_wm/blob/master/lambda/prepare_featuresfact.sh">Features fact Lambda function</a></li>
                 </ul>
             </section>
             <hr>
