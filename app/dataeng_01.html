@@ -22,10 +22,10 @@
                     Of the datasets described in the above blog post, I picked Walmart Recruiting Store Sales data.
                     Some of the reasons for picking this dataset inclulde:
                 </p>
-                <ol>
+                <ul>
                     <li>Retail data, easy to understand domain</li>
                     <li>This data is hosted on Kaggle, ver good description of data is provided by Kaggle</li>
-                </ol>
+                </ul>
                 </p>
                 <p>
                     Source data located <a href="https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting">here</a>.
@@ -34,12 +34,69 @@
             <hr>
             <section>
                 <h2>Schema Design</h2>
+                <h3>Data Summary</h3>
                 <p>
-                    A dimensional design with the following dimension and fact tables:
-                    - date dimension
-                    - sales fact
-                    - features fact
+                    The data provided is historical sales data for 45 Walmart stores for years
+                    2010 thru 2012.
                 </p>
+                <p>
+                    The primary data is weekly department-wise sales amount for each store.
+                    Another piece of information included is whether a given week is a holiday
+                    week or a reguler week. For the purpose of this data, only the following four
+                    are considered holidays: Super Bowl, Labor Day, Thanksgiving and
+                    Christmas.
+                </p>
+                <p>
+                    In addition, data is available that provides information such temperature
+                    in the region, fuel price and markdowns etc.
+                </p>
+                <p>
+                    Of the files available from the data source, I used the following files for this
+                    data engineering prokect:
+                </p>
+                <ul>
+                    <li>train.csv</li>
+                    <li>features.csv</li>
+                </ul>
+
+                <h3>Schema Design</h3>
+                <p>
+                    Applying dimensional design process on the data yields one dimension
+                    and two fact tables. The tables and their fields are listed below:
+                </p>
+                <ul>
+                    <li>date dimension
+                        <ul>
+                            <li>Id (PK)</li>
+                            <li>Date</li>
+                            <li>Is Holiday?</li>
+                            <li>Holiday Name</li>
+                        </ul>
+                    </li>
+                    <li>sales fact
+                        <ul>
+                            <li>Store (PK)</li>
+                            <li>Dept (PK)</li>
+                            <li>Date Key (PK)</li>
+                            <li>Weekly Sales</li>
+                        </ul>
+                    </li>
+                    <li>features fact
+                        <ul>
+                            <li>Store (PK)</li>
+                            <li>Date Key (PK)</li>
+                            <li>Temperature</li>
+                            <li>Fuel Price</li>
+                            <li>Markdown 1</li>
+                            <li>Markdown 2</li>
+                            <li>Markdown 3</li>
+                            <li>Markdown 4</li>
+                            <li>Markdown 5</li>
+                            <li>CPI</li>
+                            <li>Unemployment</li>
+                        </ul>
+                    </li>
+                </ul>
             </section>
             <hr>
             <section>
