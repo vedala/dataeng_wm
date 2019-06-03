@@ -1,9 +1,13 @@
 body {
     font-family: Georgia, serif;
+    font-size: 1.1em;
+    background: #eee;
+    color: #333;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: Helvetica, "Liberation Sans", Arial, sans-serif; 
+    color: #555;
 }
 
 div {
@@ -29,4 +33,10 @@ article {
 
 main {
     margin-bottom: 40px;
+}
+
+hr {
+    height: 5px;
+    background: #aaa;
+    margin-top: 30px;
 }
