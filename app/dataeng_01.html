@@ -59,7 +59,7 @@
                     <li>features.csv</li>
                 </ul>
 
-                <h3>Schema Design</h3>
+                <h3>Schema</h3>
                 <p>
                     Applying dimensional design process on the data yields one dimension
                     and two fact tables. The tables and their fields are listed below:
@@ -159,8 +159,10 @@
                 </ul>
             </section>
             <hr>
+
             <section>
                 <h2>Data Load</h2>
+                <h3>ETL Tool</h3>
                 <p>
                     Stitch is used as ETL tool (<a href="https://www.stitchdata.com/">link</a>).
                 </p>
@@ -170,14 +172,43 @@
                 </p>
                 <p>
                     Why Stitch
-                    i) offers free account. The only cloud-based ETL tool I found that offers
-                       a free account.
-                    ii) Once I started using Stitch, I found the service to be execellent.
-                        The free account allows only one destination to be added. This was
-                        adequate for my needs.
                 </p>
+                <ul>
+                    <li>offers a free plan. The only cloud-based ETL tool I found that offers a free plan.</li>
+                    <li>Once I started using Stitch, I found the service to be execellent.
+                        The free account allows only one destination to be added. This was
+                        adequate for my needs.</li>
+                </ul>
                 <p>
-                    Data loaded into an AWS RDS PostgreSQL instance.
+                    Setting up data source in Stitch
+                </p>
+                <ul>
+                    <li>as mentioned above, after the cleaning and preparation step, the
+                        cleaned data files are uploaded to S3</li>
+                    <li>Stitch provides the ability to use many different types of sources,
+                    CSV files stored on AWS S3 is one of the supported sources.</li>
+                    <li>On starting a new integration, the following steps are required:
+                        <ul>
+                            <li>pick integration name, this is used as the schema name
+                                in the postgres database</li>
+                            <li>select AWS S3 CSV integration from the list of integrations
+                                presented. Next, I type in my S3 bucket name and file name</li>
+                            <li>grant access to S3 bucket. Directs me to create an IAM role,
+                                provides details such as AWS account id, role name, role
+                                policy to use for creating the IAM role</li>
+                            <li>setup CSV files to table name mapping</li>
+                            <li>setup integration frequency. Since this project needs just one-time
+                                load of data, I pick the default (30 minute) interval. Stitch
+                                starts the first load within minutes of setting up the integration.
+                                After data load is complete, I turn off the integration.</li>
+                        </ul>
+
+                </ul>
+                <h3>Data Warehouse</h3>
+                <p>
+                    Data loaded into an AWS RDS PostgreSQL instance. The data is organized
+                    as a star schema. The Stitch tool creates the dimension and fact tables
+                    in the PostgreSQL instance.
                 </p>
             </section>
             <hr>
