@@ -5,7 +5,7 @@ body {
     color: #333;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, button {
     font-family: Helvetica, "Liberation Sans", Arial, sans-serif; 
     color: #555;
 }
@@ -46,4 +46,9 @@ article {
     border: 2px;
     border: 3px solid #ccc;
     margin: 20px 30px 20px 50px;
+}
+
+button {
+    font-size: 1em;
+    color: inherit;
 }
