@@ -187,22 +187,33 @@
                         cleaned data files are uploaded to S3</li>
                     <li>Stitch provides the ability to use many different types of sources,
                     CSV files stored on AWS S3 is one of the supported sources.</li>
-                    <li>On starting a new integration, the following steps are required:
-                        <ul>
-                            <li>pick integration name, this is used as the schema name
-                                in the postgres database</li>
-                            <li>select AWS S3 CSV integration from the list of integrations
-                                presented. Next, I type in my S3 bucket name and file name</li>
-                            <li>grant access to S3 bucket. Directs me to create an IAM role,
-                                provides details such as AWS account id, role name, role
-                                policy to use for creating the IAM role</li>
-                            <li>setup CSV files to table name mapping</li>
-                            <li>setup integration frequency. Since this project needs just one-time
-                                load of data, I pick the default (30 minute) interval. Stitch
-                                starts the first load within minutes of setting up the integration.
-                                After data load is complete, I turn off the integration.</li>
-                        </ul>
-
+                    <li>On starting a new integration, I first pick an integration name</li>
+                    <li>this is used as the schema name in the postgres database</li>
+                    <li>next, I select AWS S3 CSV integration from the list of integrations
+                        presented. Next, I type in my S3 bucket name and file name</li>
+                    <li>grant access to S3 bucket. Directs me to create an IAM role,
+                        provides details such as AWS account id, role name, role
+                        policy to use for creating the IAM role</li>
+                    <li>setup CSV files to table name mapping</li>
+                    <li>setup integration frequency. Since this project needs just one-time
+                        load of data, I pick the default (30 minute) interval. Stitch
+                        starts the first load within minutes of setting up the integration.
+                        After data load is complete, I turn off the integration.</li>
+                </ul>
+                <p>
+                    Setting up destination in Stitch
+                </p>
+                <ul>
+                    <li>as mentioned above, Stitch free plan allows only one destination to
+                        be setup</li>
+                    <li>on the user interface for setting up the destination, I pick PostgreSQL
+                        as the destination type</li>
+                    <li>on picking PostgreSQL, I enter details such as RDS host endpoint, port,
+                        username, password and database name</li>
+                    <li>the interface provides a list of IP address and directs me to whitelist
+                        these IP addresses on my RDS instance</li>
+                    <li>after entering all details, Stitch checks if it can connect to the
+                        database and if successful, creates the destination</li>
                 </ul>
                 <h3>Data Warehouse</h3>
                 <p>
