@@ -1,9 +1,13 @@
-# Data engineering personal project - Walmart
+# Data Pipeline Tutorial
 
-## This project is currently in development.
+This is a simple data pipeline project to learn basic data engineering skills.
 
-### Technologies and Services Used
-- Bash script for initial data cleaning
-- Stitchdata for data ingestion
-- AWS RDS PostgreSQL for storing data warehouse
-- Using chart.js library to display charts on web page
+Follows the typical steps involved in a data pipeline:
+- identify data source and acquire data
+- clean and prepare data
+- load data into data warehouse
+
+### More information
+
+See this [post](https://kalyanv.com/2019/05/23/tutorial-a-basic-data-pipeline.html)
+for more information.
