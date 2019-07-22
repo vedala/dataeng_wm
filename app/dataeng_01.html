@@ -8,86 +8,22 @@
     </head>
     <body>
         <header>
-            <h1>Data Engineering Tutorial - Analysis</h1>
+            <h1>Data Pipeline Tutorial - Demo</h1>
         </header>
         <main>
             <hr>
             <section>
-                <h2>Data Source</h2>
+                <h2>Introduction</h2>
                 <p>
-                    Data used for this tutorial is the Walmart Recruiting Store Sales data.
+                    This site demonstrates how to perform simple analysis on
+                    publicly-available Walmart Recruiting Store Sales Data.
                 </p>
                 <p>
-                    Source data located <a href="https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting">here</a>.
-                </p>
-                <p>
-                    The data provided is historical sales data for 45 Walmart stores for years
-                    2010 thru 2012.
-                </p>
-                <p>
-                    The primary data is weekly department-wise sales amount for each store.
-                    Another piece of information included is whether a given week is a holiday
-                    week or a reguler week. For the purpose of this data, only the following four
-                    holidays are considered: Super Bowl, Labor Day, Thanksgiving and
-                    Christmas.
+                    A more detailed description of the entire pipeline can be found in
+                    <a href="https://kalyanv.com/2019/05/23/tutorial-a-basic-data-pipeline.html">this</a>
+                    blog post.
                 </p>
 
-            </section>
-            <hr>
-            <section>
-                <h2>Schema Design</h2>
-                <p>
-                    Applying dimensional design process on the data yields one dimension
-                    and two fact tables:
-                </p>
-                <ul>
-                    <li>date dimension</li>
-                    <li>sales fact</li>
-                    <li>features fact</li>
-                </ul>
-            </section>
-            <hr>
-            <section>
-                <h2>Data Cleaning and Preparation</h2>
-                <p>
-                    <a href="https://www.stitchdata.com/">Stitch</a> ETL tool is used
-                    to load data into data warehouse.
-                </p>
-                <p>
-                    Cleaning and prepration is done while creating each of the
-                    dimension and fact CSV files.
-                </p>
-                <p>
-                    Data cleaning and prepartion scripts are implemented as AWS Lambda
-                    functions. Source data files to AWS S3 and the Lambda functions download
-                    the source data files, clean and prepare CSV files containing dimension
-                    & fact data and store the generated files back to S3.
-                </p>
-                <p>
-                    Links to source code of the Lambda functions are:
-                </p>
-                <ul>
-                    <li><a href="https://github.com/vedala/dataeng_wm/blob/master/lambda/prepare_datedim.sh">Date dimension Lambda function</a></li>
-                    <li><a href="https://github.com/vedala/dataeng_wm/blob/master/lambda/prepare_salesfact.sh">Sales fact Lambda function</a></li>
-                    <li><a href="https://github.com/vedala/dataeng_wm/blob/master/lambda/prepare_featuresfact.sh">Features fact Lambda function</a></li>
-                </ul>
-            </section>
-            <hr>
-
-            <section>
-                <h2>Data Load</h2>
-                <h3>ETL Tool</h3>
-                <p>
-                    ETL tool used is Stitch (<a href="https://www.stitchdata.com/">link</a>).
-                </p>
-                <p>
-                    Stitch is a sync-only provider. Stitch tool does not provide any
-                    transform ability.
-                </p>
-                <h3>Data Warehouse</h3>
-                <p>
-                    Data loaded into an AWS RDS PostgreSQL instance.
-                </p>
             </section>
             <hr>
             <section>
@@ -100,7 +36,7 @@
                 <ul>
                     <li>Analysis buttons kick off ajax calls to AWS Lambda functions</li>
                     <li>The lambda functions run analysis SQL queries on the postgres
-                        database and return the result to the web application</li>
+                        database and return the result to this web application</li>
                     <li>Chartjs is used for rendering charts</li>
                 </ul>
 
