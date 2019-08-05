@@ -1,4 +1,4 @@
-# Data Pipeline Tutorial
+# Data Pipeline Demo Project
 
 This is a simple data pipeline project to learn basic data engineering skills.
 
